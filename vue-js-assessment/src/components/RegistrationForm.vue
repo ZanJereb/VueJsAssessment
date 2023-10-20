@@ -38,11 +38,14 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'RegustrationForm',
 
   setup() {
+    const store = useStore();
+
     const userData = ref({
       name: '',
       email: '',
@@ -54,13 +57,13 @@ export default defineComponent({
       const errorMessage = ref('');
 
       if (!data.value.name) {
-        errorMessage.value += 'name is required, ';
+        errorMessage.value += 'name is required; ';
       }
       if (!data.value.email) {
-        errorMessage.value += 'e-mail is required, ';
+        errorMessage.value += 'e-mail is required; ';
       }
       if (!data.value.phoneNumber) {
-        errorMessage.value += 'phone number is required.';
+        errorMessage.value += 'phone number is required;';
       }
 
       return errorMessage.value;
@@ -70,9 +73,9 @@ export default defineComponent({
       const errorMessage = checkForError(userData);
 
       if (errorMessage) {
-        this.$store.dispatch('createError', errorMessage);
+        store.dispatch('createError', errorMessage);
       } else {
-        this.$store.dispatch('createUser', userData.value);
+        store.dispatch('createUser', userData.value);
       }
     }
 
@@ -93,7 +96,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
 form {
   max-width: 420px;
   margin: 30px auto;

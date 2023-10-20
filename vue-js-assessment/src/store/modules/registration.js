@@ -1,3 +1,14 @@
+/* eslint-disable */
+const state = {
+  registrationStatus: 'Not Submitted',
+  userRegistrationData: {
+    name: '',
+    email: '',
+    phoneNumber: '',
+  },
+  errorMessage: '',
+};
+
 const mutations = {
   SET_USER_DATA(state, userData) {
     state.userRegistrationData = userData;
@@ -10,6 +21,15 @@ const mutations = {
   },
   RESET_ERROR_MSG(state) {
     state.errorMessage = '';
+  },
+};
+
+const getters = {
+  errorMessage(state) {
+    return state.errorMessage;
+  },
+  registrationStatus(state) {
+    return state.registrationStatus;
   },
 };
 
@@ -26,18 +46,9 @@ const actions = {
   },
 };
 
-const state = {
-  registrationStatus: 'Not Submitted',
-  userRegistrationData: {
-    name: '',
-    email: '',
-    phoneNumber: '',
-  },
-  errorMessage: '',
-};
-
 export default {
   state,
   mutations,
   actions,
+  getters,
 };
