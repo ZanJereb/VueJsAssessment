@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 
 import RegistrationForm from '../components/RegistrationForm.vue';
@@ -25,16 +25,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    const showErrorBanner = ref(false);
-    const errorMessage = ref('');
-
-    watch(() => store.getters.registrationStatus, (status) => {
-      if (status === 'Error') {
-        showErrorBanner.value = true;
-      } else {
-        showErrorBanner.value = false;
-      }
-    });
+    const showErrorBanner = computed(() => store.getters.registrationStatus === 'Error');
 
     function closeErrorBanner() {
       showErrorBanner.value = false;
@@ -42,7 +33,6 @@ export default defineComponent({
 
     return {
       showErrorBanner,
-      errorMessage,
       closeErrorBanner,
     };
   },
