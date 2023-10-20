@@ -6,7 +6,6 @@
         v-model="userData.username"
         id="username"
         type="text"
-        required
       />
     </label>
     <label for="password">
@@ -15,16 +14,6 @@
         v-model="userData.password"
         id="password"
         type="password"
-        required
-      />
-    </label>
-    <label for="repeatPassword">
-      Repeat password:
-      <input
-        v-model="userData.repeatPassword"
-        id="repeatPassword"
-        type="password"
-        required
       />
     </label>
     <label for="name">
@@ -33,7 +22,6 @@
         v-model="userData.name"
         id="name"
         type="text"
-        required
       />
     </label>
     <label for="surname">
@@ -42,7 +30,6 @@
         v-model="userData.surname"
         id="surname"
         type="text"
-        required
       />
     </label>
     <label for="email">
@@ -51,7 +38,6 @@
         v-model="userData.email"
         id="email"
         type="text"
-        required
       />
     </label>
     <label for="phoneNumber">
@@ -60,37 +46,35 @@
         v-model="userData.phoneNumber"
         id="phoneNumber"
         type=""
-        required
         @keypress="isNumber"
       />
     </label>
     <div class="submit">
-      <button @click="createAccount">
-        Create an Account
+      <button @click="createUser">
+        Create User
       </button>
     </div>
   </form>
 </template>
 
 <script>
-import { defineComponent, reactive } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'RegustrationForm',
 
   setup() {
-    const userData = reactive({
+    const userData = ref({
       username: '',
       password: '',
-      repeatPassword: '',
       name: '',
       surname: '',
       email: '',
       phoneNumber: '',
     });
 
-    function createAccount() {
-
+    function createUser() {
+      this.$store.dispatch('createUser', userData);
     }
 
     // To prevent input of any other character that arent number or '+'
@@ -103,7 +87,7 @@ export default defineComponent({
 
     return {
       userData,
-      createAccount,
+      createUser,
       isNumber,
     };
   },
