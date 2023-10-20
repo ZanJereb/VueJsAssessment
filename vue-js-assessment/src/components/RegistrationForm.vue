@@ -75,6 +75,8 @@ export default defineComponent({
 
     function createUser() {
       this.$store.dispatch('createUser', userData);
+
+      console.log(this.$store.state.registration.userData);
     }
 
     // To prevent input of any other character that arent number or '+'
