@@ -1,35 +1,12 @@
 <template>
   <form>
-    <label for="username">
-      Username:
-      <input
-        v-model="userData.username"
-        id="username"
-        type="text"
-      />
-    </label>
-    <label for="password">
-      Password:
-      <input
-        v-model="userData.password"
-        id="password"
-        type="password"
-      />
-    </label>
     <label for="name">
       Name:
       <input
         v-model="userData.name"
         id="name"
         type="text"
-      />
-    </label>
-    <label for="surname">
-      Surname:
-      <input
-        v-model="userData.surname"
-        id="surname"
-        type="text"
+        required
       />
     </label>
     <label for="email">
@@ -38,6 +15,7 @@
         v-model="userData.email"
         id="email"
         type="text"
+        required
       />
     </label>
     <label for="phoneNumber">
@@ -46,6 +24,7 @@
         v-model="userData.phoneNumber"
         id="phoneNumber"
         type=""
+        required
         @keypress="isNumber"
       />
     </label>
@@ -65,21 +44,39 @@ export default defineComponent({
 
   setup() {
     const userData = ref({
-      username: '',
-      password: '',
       name: '',
-      surname: '',
       email: '',
       phoneNumber: '',
     });
 
-    function createUser() {
-      this.$store.dispatch('createUser', userData);
+    // Checks for errors on registration form on submit
+    function checkForError(data) {
+      const errorMessage = ref('');
 
-      console.log(this.$store.state.registration.userData);
+      if (!data.value.name) {
+        errorMessage.value += 'name is required, ';
+      }
+      if (!data.value.email) {
+        errorMessage.value += 'e-mail is required, ';
+      }
+      if (!data.value.phoneNumber) {
+        errorMessage.value += 'phone number is required.';
+      }
+
+      return errorMessage.value;
     }
 
-    // To prevent input of any other character that arent number or '+'
+    function createUser() {
+      const errorMessage = checkForError(userData);
+
+      if (errorMessage) {
+        this.$store.dispatch('createError', errorMessage);
+      } else {
+        this.$store.dispatch('createUser', userData.value);
+      }
+    }
+
+    // To prevent input of any other character that arent number
     function isNumber($event) {
       const keyCode = ($event.keyCode ? $event.keyCode : $event.which);
       if (keyCode < 48 || keyCode > 57) {
