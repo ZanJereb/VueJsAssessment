@@ -1,14 +1,9 @@
 import { createStore } from 'vuex';
 
+import registration from './modules/registration';
+
 export default createStore({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    registration,
   },
 });
