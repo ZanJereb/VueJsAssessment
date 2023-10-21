@@ -1,7 +1,10 @@
 <template>
   <nav>
-    <router-link to="/">About</router-link> |
+    <router-link to="/">About</router-link>
+    <span> | </span>
     <router-link to="/registration">Registration</router-link>
+    <span> | </span>
+    <router-link to="/dynamicForm">Dynamic Form</router-link>
   </nav>
   <router-view/>
 </template>
