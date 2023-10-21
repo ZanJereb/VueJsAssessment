@@ -131,6 +131,8 @@ button {
   margin-top: 10px;
   border-radius: 10px;
   color: white;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 .submit {
   text-align: right;

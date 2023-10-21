@@ -11,8 +11,8 @@
 import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 
-import RegistrationForm from '../components/RegistrationForm.vue';
-import RegistrationError from '../components/RegistrationError.vue';
+import RegistrationForm from '../components/registration/RegistrationForm.vue';
+import RegistrationError from '../components/registration/RegistrationError.vue';
 
 export default defineComponent({
   name: 'RegistrationView',
