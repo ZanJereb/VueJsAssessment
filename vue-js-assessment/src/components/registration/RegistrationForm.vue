@@ -29,7 +29,7 @@
       />
     </label>
     <div class="submit">
-      <button @click="createUser">
+      <button @click.prevent="createUser">
         Create User
       </button>
     </div>
